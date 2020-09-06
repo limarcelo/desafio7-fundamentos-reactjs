@@ -25,6 +25,7 @@
   },
   "plugins": ["react", "react-hooks", "@typescript-eslint", "prettier"],
   "rules": {
+    "no-console": "off",
     "react/jsx-props-no-spreading": "off",
     "prettier/prettier": "error",
     "react-hooks/rules-of-hooks": "error",
@@ -40,11 +41,19 @@
     "import/extensions": [
       "error",
       "ignorePackages",
+      "no-console",
       {
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "no-restricted-syntax": [
+      "error",
+      {
+          "selector": "CallExpression[callee.object.name='console'][callee.property.name!=/^(log|warn|error|info|trace)$/]",
+          "message": "Unexpected property on console object was called"
+      }
+  ]
   },
   "settings": {
     "import/resolver": {
